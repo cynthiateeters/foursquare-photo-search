@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unsplash Photo Search</title>
+  <title>Foursquare Photo Search</title>
   <style>
     body {
       font-family: sans-serif;
@@ -36,11 +36,11 @@
 
   <!-- search form -->
   <form class="search-form">
-    <label for="query">Search</label>
-    <input id="query" name="query" type="text" />
     <button>Search</button>
   </form>
 
+
+  <p class="output"></p>
   <!-- Show first image that comes back from search -->
 
   <div class="post">
@@ -78,12 +78,33 @@
         .then((res) => res.json())
         .catch((err) => console.error(err));
 
-        console.log(response)
+
+        console.log(response.response)
+
+        console.log(response.response.venues[0].id);
+
+        const output = document.querySelector('.output');
+
+        output.innerText = `The Foursquare id for Statue of Liberty is ${response.response.venues[0].id}`;
+
+        // Get photo
+
+        const photo = await fetch('/.netlify/functions/fsq-photo', {
+        method: 'POST',
+        body: JSON.stringify({
+          query: response.response.venues[0].id,
+        }),
+      })
+        .then((res) => res.json())
+        .catch((err) => console.error(err));
+
+
+        console.log(photo);
       //const dataObj = response.results[0]
 
       // 
 
-      const postImg = document.querySelector('.post__img')
+      //const postImg = document.querySelector('.post__img')
       // postImg.src = dataObj.urls.small;
       // const postUser = document.querySelector('.post__user');
       /* 

@@ -13,7 +13,10 @@ exports.handler = async (event) => {
 
   console.log(query);
 
-  const apiSearch = `https://api.foursquare.com/v2/venues/search?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20180323&ll=${query.latlng.lat},${query.latlng.lng}&query=${query.title}&limit=1`;
+  const apiSearch = `https://api.foursquare.com/v2/venues/${query}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRETD}&v=20190425`;
+
+
+  // 
 
   console.log(apiSearch)
 
