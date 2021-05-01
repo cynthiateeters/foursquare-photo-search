@@ -1,4 +1,4 @@
-# Unsplash Photo Search
+# Foursquare Photo Search
 
 [Inspired by: Youtube Video "Protect Secret Keys(with Jason Lengstork & Joyce Lin)" ](https://www.youtube.com/watch?v=55yiBkD88oo)
 
@@ -8,5 +8,5 @@
 * Postman
 * Netlify Dev
 * Netlify Functions
-* Unsplash's API
+* Foursquare's API
 

@@ -7,29 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foursquare Photo Search</title>
   <link rel="shortcut icon" href="favicon.png" type="image/png">
-  <style>
-    body {
-      font-family: sans-serif;
-    }
-
-    figure {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 80%;
-      max-width: 400px;
-    }
-
-    figcaption {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    img {
-      max-width: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -40,9 +18,6 @@
     <button>Search</button>
   </form>
 
-
-  <p class="output"></p>
-
   <div class="post">
     <figure>
       <img src="" alt="" class="post__img">
@@ -50,77 +25,7 @@
     </figure>
   </div>
 
-
-  <script>
-    const form = document.querySelector('.search-form');
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      const formData = new FormData(event.target);
-
-      const query = {
-        title: 'Statue of Liberty',
-        latlng: {
-          lat: 40.689247,
-          lng: -74.044502,
-        }
-      };
-
-      /* 
-       Get venue
-      */
-
-      const response = await fetch('/.netlify/functions/fsq-search', {
-        method: 'POST',
-        body: JSON.stringify({
-          query: query,
-        }),
-      })
-        .then((res) => res.json())
-        .catch((err) => console.error(err));
-
-
-      console.log(response.response)
-
-      const output = document.querySelector('.output');
-
-      //output.innerText = `The Foursquare id for Statue of Liberty is ${response.response.venues[0].id}`;
-
-
-      /* 
-      Get best photo and description for that venue       
-      */
-
-      const photo = await fetch('/.netlify/functions/fsq-photo', {
-        method: 'POST',
-        body: JSON.stringify({
-          query: response.response.venues[0].id,
-        }),
-      })
-        .then((res) => res.json())
-        .catch((err) => console.error(err));
-
-
-      console.log(photo.response.venue);
-
-      const prefix = photo.response.venue.bestPhoto.prefix;
-      const suffix = photo.response.venue.bestPhoto.suffix;
-      const url = `${prefix}300x500${suffix}`;
-      console.log(url);
-
-
-      const postImg = document.querySelector('.post__img')
-      postImg.src = url;
-
-      const postDesc = document.querySelector('.post__desc');
-      console.log(photo.response.venue.description);
-      postDesc.innerHTML = photo.response.venue.description;
-
-
-
-    });
-  </script>
+  <script src="index.js"></script>
 </body>
 
 </html>
