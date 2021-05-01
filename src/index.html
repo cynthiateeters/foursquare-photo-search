@@ -61,22 +61,31 @@
 
       const formData = new FormData(event.target);
 
-      const response = await fetch('/.netlify/functions/unsplash-search', {
+      const query = {
+        title: 'Statue of Liberty',
+        latlng: {
+          lat: 40.689247,
+          lng: -74.044502,
+        }
+      };
+
+      const response = await fetch('/.netlify/functions/fsq-search', {
         method: 'POST',
         body: JSON.stringify({
-          query: formData.get('query'),
+          query: query,
         }),
       })
         .then((res) => res.json())
         .catch((err) => console.error(err));
 
-      const dataObj = response.results[0]
+        console.log(response)
+      //const dataObj = response.results[0]
 
       // 
 
       const postImg = document.querySelector('.post__img')
-      postImg.src = dataObj.urls.small;
-      const postUser = document.querySelector('.post__user');
+      // postImg.src = dataObj.urls.small;
+      // const postUser = document.querySelector('.post__user');
       /* 
         Add an attribution statement below using the
         postUser element and the photographer's name from dataObj
